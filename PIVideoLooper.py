@@ -1,24 +1,20 @@
-import os
+import subprocess
 import json
 
 with open('config.json') as configfile:
     config = json.load(configfile)
 
-
-command = "omxplayer"
+command = ["omxplayer"]
 
 if config["subtitles"] == True:
-    command = command + "--subtitles " + config["subtitlesLocation"]
-
+    command.append("--subtitles" + config["subtitlesLocation"])
 if config["loop"] == True:
-    command = command + "--loop "
-
+    command.append("--loop")
 if config["noInterface"] == True:
-    command = command + "--no-osd "
+    command.append("--no-osd")
 
-command = command + " " + config['commandLine'] + " \"" + config['fileLocation'] + "\""
-
+command.append(config['fileLocation'])
 
 print(command)
 
-# os.system("command")
+omxprocess = subprocess.Popen(command, stdin=subprocess.PIPE)
