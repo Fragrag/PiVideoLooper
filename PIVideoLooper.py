@@ -30,7 +30,7 @@ command.append(join(abspath, config['fileLocation']))
 print("Running command with parameters:")
 print(command)
 
-with open("log.txt","wb") as out, open("error.txt","wb") as err:
+with open(join(abspath, 'log.txt'),"wb") as out, open(join(abspath, 'errorlog.txt'),"wb") as err:
     subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
 
 # subprocess.Popen(command, stdin=subprocess.PIPE)
