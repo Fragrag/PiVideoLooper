@@ -3,6 +3,6 @@
     "commandLine": "",
     "subtitles": false,
     "subtitlesLocation": "",
-    "loop": false,
+    "loop": true,
     "noInterface": true
 }
