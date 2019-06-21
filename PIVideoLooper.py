@@ -29,4 +29,8 @@ command.append(join(abspath, config['fileLocation']))
 
 print("Running command with parameters:")
 print(command)
-omxprocess = subprocess.Popen(command, stdin=subprocess.PIPE)
+
+with open("log.txt","wb") as out, open("error.txt","wb") as err:
+    subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
+
+# subprocess.Popen(command, stdin=subprocess.PIPE)
