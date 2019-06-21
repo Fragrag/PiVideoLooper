@@ -21,7 +21,8 @@ if config["noInterface"] == True:
     command.append("--no-osd")
 
 # Custom arguments are added
-command.append(config['commandLine'])
+if len(config['commandLine']) != 0:
+    command.append(config['commandLine'])
 
 # Finally append the file location of video
 command.append(join(abspath, config['fileLocation']))
