@@ -14,7 +14,7 @@ command = ["omxplayer"]
 
 # Goes through the booleans in the config and appends the appropriate argument
 if config["subtitles"] == True:
-    command.append("--subtitles" + join(abspath, config["subtitlesLocation"]))
+    command.append("--subtitles " + join(abspath, config["subtitlesLocation"]))
 if config["loop"] == True:
     command.append("--loop")
 if config["noInterface"] == True:
