@@ -7,12 +7,12 @@ server = Flask(__name__)
 settings = PiVideoLooper.Config(PiVideoLooper.config_file)
 
 class SettingsForm(FlaskForm):
-    self.video_file = StringField()
-    self.command_line = StringField()
-    self.subtitles = BooleanField()
-    self.subtitles_location = StringField()
-    self.loop = BooleanField()
-    self.no_interface = BooleanField()
+    video_file = StringField('Video file')
+    command_line = StringField('Custom command line arguments')
+    subtitles = BooleanField('Enable subtitles')
+    subtitles_location = StringField('Subtitles file location')
+    loop = BooleanField('Enable loop')
+    no_interface = BooleanField('Enable on-screen-display')
 
     submit = SubmitField()
 
@@ -34,15 +34,30 @@ def main():
                             form=form
                             )
 
-@server.route('/update_config', methods=['GET', 'POST'])
-def update_config():
-    print('hello')
-    return 'nothing'
+@server.route('/launch_video', methods=['GET', 'POST'])
+def launch_video():
+    PiVideoLooper.launch_video()
+    return ('', 204)
+
+@server.route('/kill_video', methods=['GET', 'POST'])
+def kill_video():
+    PiVideoLooper.kill_video()
+    return ('', 204)
+
+@server.route('/restart_video', methods=['GET', 'POST'])
+def restart_video():
+    PiVideoLooper.restart_video()
+    return ('', 204)
+
+@server.route('/reboot', methods=['GET', 'POST'])
+def reboot():
+    PiVideoLooper.reboot()
+    return ('', 204)
 
 @server.route('/echo')
 def echo():
-    print('hello')
-    return 'nothing'
+    PiVideoLooper.echo('Echo')
+    return ('', 204)
 
 if __name__ == "__main__":
     server.run(host='0.0.0.0', port=5001, debug=True)

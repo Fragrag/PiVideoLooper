@@ -6,8 +6,9 @@ abspath = os.path.dirname(__file__)
 config_file = os.path.join(abspath, 'config.json')
 
 class Config:
-    def __init__(self, config_location):
-        with open(config_location) as configfile:
+    def __init__(self, _config_location):
+        self.config_location = _config_location
+        with open(self.config_location) as configfile:
             config = json.load(configfile)
 
         self.file_location = config['fileLocation']        
@@ -17,8 +18,8 @@ class Config:
         self.loop = config['loop']
         self.no_interface = config['noInterface']
 
-    def refresh_config(config_location):
-        with open(config_location) as configfile:
+    def refresh_config(self):
+        with open(self.config_location) as configfile:
             config = json.load(configfile)
 
         self.file_location = config['fileLocation']        
@@ -28,8 +29,19 @@ class Config:
         self.loop = config['loop']
         self.no_interface = config['noInterface']
 
-    def write_config(config_location):
-        pass
+    def write_config(self):
+        data = []
+        data.append({
+            'fileLocation': self.file_location,
+            'commandLine': self.command_line,
+            'subtitles': self.subtitles,
+            'subtitlesLocation': self.subtitles_location,
+            'loop': self.loop,
+            'noInterface': self.no_interface
+        })
+
+        with open(self.config_location) as configfile:
+            json.dump(data, self.config_location)
 
 def launch_video():
     # Loads the config
@@ -68,7 +80,7 @@ def restart_video():
     kill_video()
     launch_video()
 
-def restart_pi():
+def reboot():
     command = ['reboot now']
     with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
         subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
