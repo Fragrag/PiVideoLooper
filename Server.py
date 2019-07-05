@@ -4,15 +4,15 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
 
 server = Flask(__name__)
-settings = PiVideoLooper.read_config()
+settings = PiVideoLooper.Config(PiVideoLooper.config_file)
 
 class SettingsForm(FlaskForm):
-    video_file = StringField()
-    command_line = StringField()
-    subtitles = BooleanField()
-    subtitles_location = StringField()
-    loop = BooleanField()
-    no_interface = BooleanField()
+    self.video_file = StringField()
+    self.command_line = StringField()
+    self.subtitles = BooleanField()
+    self.subtitles_location = StringField()
+    self.loop = BooleanField()
+    self.no_interface = BooleanField()
 
     submit = SubmitField()
 

@@ -17,15 +17,23 @@ class Config:
         self.loop = config['loop']
         self.no_interface = config['noInterface']
 
-def read_config():
-    return Config(config_file)
-    
-def write_config(config_object):
-    pass
+    def refresh_config(config_location):
+        with open(config_location) as configfile:
+            config = json.load(configfile)
+
+        self.file_location = config['fileLocation']        
+        self.command_line = config['commandLine']
+        self.subtitles = config['subtitles']
+        self.subtitles_location = config['subtitlesLocation']
+        self.loop = config['loop']
+        self.no_interface = config['noInterface']
+
+    def write_config(config_location):
+        pass
 
 def launch_video():
     # Loads the config
-    config = read_config()
+    config = Config(config_file)
 
     # Sets the base command, i.e. the video player
     command = ['omxplayer']
