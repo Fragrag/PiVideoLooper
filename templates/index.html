@@ -28,38 +28,28 @@
     });
   </script>
 
-<form method="POST" action="/string">
-  {{ form.video_file.label }}
-  {{ form.video_file() }}
-  <!-- {{ form.video_file.label }}
-  {{ form.video_file(value=settings.video_file) }}
+  <form method="POST" action="/string">
+    {{ form.video_file.label }}
+    {{ form.video_file }}
 
-  {{ form.command_line.label }}
-  {{ form.command_line(value=settings.command_line) }}
-  
-  {{ form.subtitles.label }}
-  {{ form.subtitles(value=settings.subtitles) }}
+    {{ form.command_line.label }}
+    {{ form.command_line }}
+    
+    {{ form.subtitles.label }}
+    {{ form.subtitles }}
 
-  {{ form.subtitles_location.label }}
-  {{ form.subtitles_location(value=settings.subtitles_location) }}
+    {{ form.subtitles_location.label }}
+    {{ form.subtitles_location }}
 
-  {{ form.loop.label }}
-  {{ form.loop(value=settings.loop) }}
+    {{ form.loop.label }}
+    {{ form.loop }}
 
-  {{ form.no_interface.label }}
-  {{ form.no_interface(value=settings.no_interface) }} -->
-
-  {{ form.submit() }}
-</form>
+    {{ form.no_interface.label }}
+    {{ form.no_interface }}
 
 
-  <div class='container'>
-      <h3>Test</h3>
-          <form>
-              <a href=# id=test><button class='btn btn-default'>Test</button></a>
-          </form>
-  
-  </div>
+    {{ form.submit }}
+  </form>
 
 
 </body>

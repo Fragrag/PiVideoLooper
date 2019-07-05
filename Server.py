@@ -16,17 +16,22 @@ class SettingsForm(FlaskForm):
 
     submit = SubmitField()
 
+    def __init__(self, configobject, *args, **kwargs):
+        super(SettingsForm, self).__init__(*args, **kwargs)
+        self.video_file.data = settings.file_location
+        self.command_line.data = settings.command_line
+        self.subtitles.data = settings.subtitles
+        self.subtitles_location.data = settings.subtitles_location
+        self.loop.data = settings.loop
+        self.no_interface.data = settings.no_interface
+
 @server.route('/', methods=['GET', 'POST'])
 def main():
-    form = SettingsForm(csrf_enabled=False)
+    form = SettingsForm(csrf_enabled=False, configobject = settings)
+
+
     return render_template('index.html', 
                             form=form
-                            # video_file = settings.video_file,
-                            # command_line = settings.command_line,
-                            # subtitles = settings.subtitles,
-                            # subtitles_location = settings.subtitles_location,
-                            # loop = settings.loop,
-                            # no_interface = settings.no_interface
                             )
 
 @server.route('/update_config', methods=['GET', 'POST'])
