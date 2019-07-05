@@ -17,11 +17,6 @@ class Config:
         self.loop = config['loop']
         self.no_interface = config['noInterface']
 
-def restart_pi():
-    command = ['reboot now']
-    with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
-        subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
-
 def read_config():
     return Config(config_file)
     
@@ -30,23 +25,21 @@ def write_config(config_object):
 
 def launch_video():
     # Loads the config
-    with open(config_file) as configfile:
-        print('JSON File loaded at ' + config_file)
-        config = json.load(configfile)
+    config = read_config()
 
     # Sets the base command, i.e. the video player
     command = ['omxplayer']
 
     # Goes through the booleans in the config and appends the appropriate argument
-    if config['subtitles'] == True:
-        command.append('--subtitles ' + os.path.join(abspath, config['subtitlesLocation']))
-    if config['loop'] == True:
+    if config.subtitles == True:
+        command.append('--subtitles ' + os.path.join(abspath, config.subtitles_location))
+    if config.loop == True:
         command.append('--loop')
-    if config['noInterface'] == True:
+    if config.no_interface == True:
         command.append('--no-osd')
 
     # Custom arguments are added
-    if len(config['commandLine']) != 0:
+    if len(config.command_line) != 0:
         command.append(config['commandLine'])
 
     # Finally append the file location of video
@@ -66,6 +59,14 @@ def kill_video():
 def restart_video():
     kill_video()
     launch_video()
+
+def restart_pi():
+    command = ['reboot now']
+    with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
+        subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
+
+def echo(msg):
+    print(msg)
 
 if __name__ == "__main__":
     launch_video()

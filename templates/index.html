@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Pi Video Looper</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <script type=text/javascript>
+    $(function() {
+      $('a#test').bind('click', function() {
+        $.getJSON('/echo',
+            function(data) {
+          //do nothing
+        });
+        return false;
+      });
+    });
+  </script>
+
+<form method="POST" action="/string">
+  {{ form.video_file.label }}
+  {{ form.video_file() }}
+
+  {{ form.command_line.label }}
+  {{ form.command_line() }}
+  
+  {{ form.subtitles.label }}
+  {{ form.subtitles() }}
+
+  {{ form.subtitles_location.label }}
+  {{ form.subtitles_location() }}
+
+  {{ form.loop.label }}
+  {{ form.loop() }}
+
+  {{ form.no_interface.label }}
+  {{ form.no_interface() }}
+
+  {{ form.submit() }}
+</form>
+
+
+  <div class='container'>
+      <h3>Test</h3>
+          <form>
+              <a href=# id=test><button class='btn btn-default'>Test</button></a>
+          </form>
+  
+  </div>
+
+
+</body>
+</html>
