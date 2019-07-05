@@ -1,3 +1,7 @@
 /.vscode
 /bin
 __pycache__/PiVideoLooper.cpython-37.pyc
+errorlog.txt
+log.txt
+__pycache__/PIVideoLooper.cpython-35.pyc
+__pycache__/PiVideoLooper.cpython-35.pyc
