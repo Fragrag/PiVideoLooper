@@ -67,23 +67,27 @@ def launch_video():
 
     print('Running command with parameters:')
     print(command)
-
-    with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
-        subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
+    subprocess.run(command)
+    # with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
+    #     subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
 
 def kill_video():
-    command = "killall omxplayer"
-    with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
-        subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
+    command = ['killall', 'omxplayer']
+    subprocess.run(command)
+
+    # with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
+    #     subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
 
 def restart_video():
     kill_video()
     launch_video()
 
 def reboot():
-    command = ['reboot now']
-    with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
-        subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
+    command = ['reboot', 'now']
+    subprocess.run(command)
+
+    # with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
+    #     subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
 
 def echo(msg):
     print(msg)
