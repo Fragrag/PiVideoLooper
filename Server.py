@@ -37,27 +37,32 @@ def main():
 
 @server.route('/launch_video', methods=['GET', 'POST'])
 def launch_video():
-    PiVideoLooper.launch_video()
+    print("Launch video")
+    # PiVideoLooper.launch_video()
     return ('', 204)
 
 @server.route('/kill_video', methods=['GET', 'POST'])
 def kill_video():
-    PiVideoLooper.kill_video()
+    print("Kill video")
+    # PiVideoLooper.kill_video()
     return ('', 204)
 
 @server.route('/restart_video', methods=['GET', 'POST'])
 def restart_video():
-    PiVideoLooper.restart_video()
+    print("Restart video")
+    # PiVideoLooper.restart_video()
     return ('', 204)
 
 @server.route('/reboot', methods=['GET', 'POST'])
 def reboot():
-    PiVideoLooper.reboot()
+    print("Reboot pi")
+    # PiVideoLooper.reboot()
     return ('', 204)
 
 @server.route('/echo')
 def echo():
-    PiVideoLooper.echo('Echo')
+    print("Echo")
+    # PiVideoLooper.echo('Echo')
     return ('', 204)
 
 if __name__ == "__main__":

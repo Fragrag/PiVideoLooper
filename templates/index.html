@@ -3,6 +3,13 @@
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- TODO: All external libraries should be brought locally when in production-->
+
+<!-- Javascript -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{ url_for('static',filename='functions.js') }}"></script>
+<!-- Style sheets -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,7 +50,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i> PiVideoLooper Status</b></h5>
+    <h5><b>PiVideoLooper Status</b></h5>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
@@ -69,8 +76,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
 
+  <div class="w3-container">
+    <h5>Quick Controls</h5>  
+    <a href=# id=launch_video><button class="w3-button w3-dark-grey">Start video</button></a>
+    <a href=# id=kill_video><button class="w3-button w3-dark-grey">Kill video</button></a>
+    <a href=# id=restart_video><button class="w3-button w3-dark-grey">Restart video</button></a>
+    <a href=# id=reboot><button class="w3-button w3-dark-grey">Reboot Pi</button></a>
+  </div>
+
   <div class="w3-panel">
-    <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-row-padding" style="margin:0 -8px">
       <div class="">
         <h5>Current Settings</h5>
         <table class="w3-table w3-striped w3-white">
