@@ -31,7 +31,8 @@ def main():
 
 
     return render_template('index.html', 
-                            form=form
+                            form=form,
+                            settings = settings
                             )
 
 @server.route('/launch_video', methods=['GET', 'POST'])

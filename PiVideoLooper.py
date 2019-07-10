@@ -1,9 +1,11 @@
 import subprocess
 import json
-import os.path
+import os
 
 abspath = os.path.dirname(__file__)
 config_file = os.path.join(abspath, 'config.json')
+
+is_video_playing = False
 
 class Config:
     def __init__(self, _config_location):
@@ -65,18 +67,16 @@ def launch_video():
     # Finally append the file location of video
     command.append(os.path.join(abspath, config['fileLocation']))
 
+    is_video_playing = True
     print('Running command with parameters:')
     print(command)
     subprocess.run(command)
-    # with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
-    #     subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
+
 
 def kill_video():
+    is_video_playing = False
     command = ['killall', 'omxplayer']
     subprocess.run(command)
-
-    # with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
-    #     subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err)
 
 def restart_video():
     kill_video()
