@@ -62,10 +62,10 @@ def launch_video():
 
     # Custom arguments are added
     if len(config.command_line) != 0:
-        command.append(config['commandLine'])
+        command.append(config.command_line)
 
     # Finally append the file location of video
-    command.append(os.path.join(abspath, config['fileLocation']))
+    command.append(os.path.join(abspath, config.file_location))
 
     is_video_playing = True
     print('Running command with parameters:')
