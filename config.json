@@ -1,8 +1,1 @@
-{
-    "fileLocation": "content/testvideo.mp4",
-    "commandLine": "",
-    "subtitles": false,
-    "subtitlesLocation": "",
-    "loop": true,
-    "noInterface": true
-}
+{"fileLocation": null, "commandLine": null, "subtitles": null, "subtitlesLocation": null, "loop": null, "noInterface": null}

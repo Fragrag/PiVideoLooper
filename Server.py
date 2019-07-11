@@ -41,14 +41,6 @@ def main():
                             playback_status = playback_status
                             )
 
-@server.route('/playback_settings')
-def playback_settings():
-    form = SettingsForm(csrf_enabled=False, configobject = settings)
-
-    return render_template('playback_settings.html',
-                            form=form,
-                            settings = settings)
-
 @server.route('/launch_video')
 def launch_video():
     print("Launch video")
