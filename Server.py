@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import PiVideoLooper
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
@@ -53,32 +53,47 @@ def playback_settings():
 def launch_video():
     print("Launch video")
     is_video_playing = True
-    PiVideoLooper.launch_video()
+    # PiVideoLooper.launch_video()
     return ('', 204)
 
 @server.route('/kill_video', methods=['GET', 'POST'])
 def kill_video():
     print("Kill video")
     is_video_playing = False
-    PiVideoLooper.kill_video()
+    # PiVideoLooper.kill_video()
     return ('', 204)
 
 @server.route('/restart_video', methods=['GET', 'POST'])
 def restart_video():
     print("Restart video")
-    PiVideoLooper.restart_video()
+    # PiVideoLooper.restart_video()
     return ('', 204)
 
 @server.route('/reboot', methods=['GET', 'POST'])
 def reboot():
     print("Reboot pi")
-    PiVideoLooper.reboot()
+    # PiVideoLooper.reboot()
+    return ('', 204)
+
+@server.route('/update_settings', methods=['GET', 'POST'])
+def update_settings():
+    print("Update settings")
+    if request.method == 'POST':
+        settings.file_location = request.args.get('file_location')
+        settings.command_line = request.args.get('command_line')
+        settings.subtitles = request.args.get('subtitles')
+        settings.subtitles_location = request.args.get('subtitles_location')
+        settings.loop = request.args.get('loop')
+        settings.no_interface = request.args.get('no_interface')
+
+    print(settings.file_location)
+    settings.write_config()
     return ('', 204)
 
 @server.route('/echo')
 def echo():
     print("Echo")
-    PiVideoLooper.echo('Echo')
+    # PiVideoLooper.echo('Echo')
     return ('', 204)
 
 if __name__ == "__main__":

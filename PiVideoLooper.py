@@ -7,17 +7,19 @@ config_file = os.path.join(abspath, 'config.json')
 
 
 class Config:
-    def __init__(self, _config_location):
+    def __init__(self, _config_location=None):
         self.config_location = _config_location
-        with open(self.config_location) as configfile:
-            config = json.load(configfile)
+        if self.config_location != None:
+            with open(self.config_location) as configfile:
+                config = json.load(configfile)
+                print(config)
 
-        self.file_location = config['fileLocation']        
-        self.command_line = config['commandLine']
-        self.subtitles = config['subtitles']
-        self.subtitles_location = config['subtitlesLocation']
-        self.loop = config['loop']
-        self.no_interface = config['noInterface']
+            self.file_location = config['fileLocation']        
+            self.command_line = config['commandLine']
+            self.subtitles = config['subtitles']
+            self.subtitles_location = config['subtitlesLocation']
+            self.loop = config['loop']
+            self.no_interface = config['noInterface']
 
     def refresh_config(self):
         with open(self.config_location) as configfile:
@@ -41,8 +43,11 @@ class Config:
             'noInterface': self.no_interface
         })
 
-        with open(self.config_location) as configfile:
-            json.dump(data, self.config_location)
+        with open(self.config_location, 'w') as configfile:
+            print(json.dump(data[0], configfile))
+            json.dump(data[0], configfile)
+            # json.dumps(data, configfile)
+            
 
 def launch_video():
     # Loads the config
