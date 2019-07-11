@@ -15,8 +15,6 @@ class SettingsForm(FlaskForm):
     loop = BooleanField('Enable loop')
     no_interface = BooleanField('Enable on-screen-display')
 
-    submit = SubmitField()
-
     def __init__(self, configobject, *args, **kwargs):
         super(SettingsForm, self).__init__(*args, **kwargs)
         self.video_file.data = settings.file_location
@@ -70,6 +68,14 @@ def reboot():
 @server.route('/update_settings', methods=['GET', 'POST'])
 def update_settings():
     print("Update settings")
+    if request.method == 'GET':
+        settings.file_location = request.args.get('file_location')
+        settings.command_line = request.args.get('command_line')
+        settings.subtitles = request.args.get('subtitles')
+        settings.subtitles_location = request.args.get('subtitles_location')
+        settings.loop = request.args.get('loop')
+        settings.no_interface = request.args.get('no_interface')
+
     if request.method == 'POST':
         settings.file_location = request.args.get('file_location')
         settings.command_line = request.args.get('command_line')
