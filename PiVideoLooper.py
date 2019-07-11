@@ -45,8 +45,6 @@ class Config:
 
         with open(self.config_location, 'w') as configfile:
             print(json.dump(data[0], configfile))
-            json.dump(data[0], configfile)
-            # json.dumps(data, configfile)
             
 
 def launch_video():

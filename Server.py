@@ -41,7 +41,7 @@ def main():
                             playback_status = playback_status
                             )
 
-@server.route('/playback_settings', methods=['GET', 'POST'])
+@server.route('/playback_settings')
 def playback_settings():
     form = SettingsForm(csrf_enabled=False, configobject = settings)
 
@@ -49,27 +49,27 @@ def playback_settings():
                             form=form,
                             settings = settings)
 
-@server.route('/launch_video', methods=['GET', 'POST'])
+@server.route('/launch_video')
 def launch_video():
     print("Launch video")
     is_video_playing = True
     # PiVideoLooper.launch_video()
     return ('', 204)
 
-@server.route('/kill_video', methods=['GET', 'POST'])
+@server.route('/kill_video')
 def kill_video():
     print("Kill video")
     is_video_playing = False
     # PiVideoLooper.kill_video()
     return ('', 204)
 
-@server.route('/restart_video', methods=['GET', 'POST'])
+@server.route('/restart_video')
 def restart_video():
     print("Restart video")
     # PiVideoLooper.restart_video()
     return ('', 204)
 
-@server.route('/reboot', methods=['GET', 'POST'])
+@server.route('/reboot')
 def reboot():
     print("Reboot pi")
     # PiVideoLooper.reboot()
