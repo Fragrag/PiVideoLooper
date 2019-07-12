@@ -1,28 +1,38 @@
 from flask import Flask, render_template, request
-import PiVideoLooper
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
 
+import PiVideoLooper
+
+
 server = Flask(__name__)
-settings = PiVideoLooper.Config(PiVideoLooper.config_file)
+settings = PiVideoLooper.Config(PiVideoLooper.CONFIG_FILE)
 is_video_playing = False
 
 class SettingsForm(FlaskForm):
-    video_file = StringField('Video file')
+    file_location = StringField('Video file')
     command_line = StringField('Custom command line arguments')
     subtitles = BooleanField('Enable subtitles')
     subtitles_location = StringField('Subtitles file location')
     loop = BooleanField('Enable loop')
     no_interface = BooleanField('Enable on-screen-display')
 
+    submit = SubmitField("Save settings")
+
     def __init__(self, configobject, *args, **kwargs):
         super(SettingsForm, self).__init__(*args, **kwargs)
-        self.video_file.data = settings.file_location
+        self.file_location.data = settings.file_location
         self.command_line.data = settings.command_line
         self.subtitles.data = settings.subtitles
         self.subtitles_location.data = settings.subtitles_location
         self.loop.data = settings.loop
         self.no_interface.data = settings.no_interface
+
+def parse_form_bool(request_arg):
+    if request_arg == 'y':
+        return True
+    else:
+        return False
 
 @server.route('/', methods=['GET', 'POST'])
 def main():
@@ -68,14 +78,6 @@ def reboot():
 @server.route('/update_settings', methods=['GET', 'POST'])
 def update_settings():
     print("Update settings")
-    if request.method == 'GET':
-        settings.file_location = request.args.get('file_location')
-        settings.command_line = request.args.get('command_line')
-        settings.subtitles = request.args.get('subtitles')
-        settings.subtitles_location = request.args.get('subtitles_location')
-        settings.loop = request.args.get('loop')
-        settings.no_interface = request.args.get('no_interface')
-
     if request.method == 'POST':
         settings.file_location = request.args.get('file_location')
         settings.command_line = request.args.get('command_line')
@@ -83,6 +85,14 @@ def update_settings():
         settings.subtitles_location = request.args.get('subtitles_location')
         settings.loop = request.args.get('loop')
         settings.no_interface = request.args.get('no_interface')
+
+    if request.method == 'GET':
+        settings.file_location = request.args.get('file_location')
+        settings.command_line = request.args.get('command_line')
+        settings.subtitles = parse_form_bool(request.args.get('subtitles'))
+        settings.subtitles_location = request.args.get('subtitles_location')
+        settings.loop = parse_form_bool(request.args.get('loop'))
+        settings.no_interface = parse_form_bool(request.args.get('no_interface'))
 
     print(settings.file_location)
     settings.write_config()

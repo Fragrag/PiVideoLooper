@@ -2,9 +2,8 @@ import subprocess
 import json
 import os
 
-abspath = os.path.dirname(__file__)
-config_file = os.path.join(abspath, 'config.json')
-
+ABSPATH = os.path.dirname(__file__)
+CONFIG_FILE = os.path.join(ABSPATH, 'config.json')
 
 class Config:
     def __init__(self, _config_location=None):
@@ -45,18 +44,20 @@ class Config:
 
         with open(self.config_location, 'w') as configfile:
             print(json.dump(data[0], configfile))
-            
+
+def get_file_list():
+    return [f for f in os.listdir(ABSPATH + '/content/') if os.path.isfile(os.path.join(ABSPATH + '/content/', f))]
 
 def launch_video():
     # Loads the config
-    config = Config(config_file)
+    config = Config(CONFIG_FILE)
 
     # Sets the base command, i.e. the video player
     command = ['omxplayer']
 
     # Goes through the booleans in the config and appends the appropriate argument
     if config.subtitles == True:
-        command.append('--subtitles ' + os.path.join(abspath, config.subtitles_location))
+        command.append('--subtitles ' + os.path.join(ABSPATH, config.subtitles_location))
     if config.loop == True:
         command.append('--loop')
     if config.no_interface == True:
@@ -67,12 +68,11 @@ def launch_video():
         command.append(config.command_line)
 
     # Finally append the file location of video
-    command.append(os.path.join(abspath, config.file_location))
+    command.append(os.path.join(ABSPATH, config.file_location))
 
     print('Running command with parameters:')
     print(command)
     subprocess.run(command)
-
 
 def kill_video():
     command = ['killall', 'omxplayer']
@@ -93,4 +93,5 @@ def echo(msg):
     print(msg)
 
 if __name__ == "__main__":
+    print(get_file_list())
     launch_video()

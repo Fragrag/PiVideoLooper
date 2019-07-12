@@ -1,1 +1,1 @@
-{"fileLocation": null, "commandLine": "-lol", "subtitles": "y", "subtitlesLocation": "\"\"", "loop": "y", "noInterface": "y"}
+{"fileLocation": "content/testvideo.mp4", "commandLine": "--help", "subtitles": true, "subtitlesLocation": "content/testvideo.srt", "loop": true, "noInterface": true}

@@ -122,6 +122,10 @@
                 <td>{{settings.subtitles}}</td>
               </tr>
               <tr>
+                <td>Subtitles location</i></td>
+                <td>{{settings.subtitles_location}}</td>
+              </tr>
+              <tr>
                 <td>Loop</i></td>
                 <td>{{settings.loop}}</td>
               </tr>
@@ -150,8 +154,8 @@
             <form method="GET" action="/update_settings" enctype="multipart/form-data">
               <table class="w3-table w3-striped w3-white">
                 <tr>
-                  <td>{{ form.video_file.label }}</td>
-                  <td>{{ form.video_file }}</td>
+                  <td>{{ form.file_location.label }}</td>
+                  <td>{{ form.file_location }}</td>
                 </tr>
                 <tr>
                   <td>{{ form.command_line.label }}</td>
@@ -174,7 +178,7 @@
                   <td>{{ form.no_interface }}</td>
                 </tr>
               </table>
-              <input type=submit value="Update settings">
+              {{form.submit}}
             </form>
           </div>
         </div>
