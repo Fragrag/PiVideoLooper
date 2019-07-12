@@ -31,15 +31,17 @@ class SettingsForm(FlaskForm):
 def python_list_to_html(list):
     """
     Converts a Python list object to a formatted HTML list string
+
     :param list: Python list object
     :return: Formatted html list string
     """
-    html_list = "<ul class=\"mt-decrease10\" style=\"list-style-type:none;\">\n"
+    # html_list = "<ul class=\"mt-decrease10\" style=\"list-style-type:none;\">\n"
+    html_list = ""
 
     for item in list:
-        html_list += "<li class=\"pl1\">" + str(item) + "</li>\n"
+        html_list += "<tr><td>" + str(item) + "</td></tr>\n"
 
-    html_list += "</ul>"
+    # html_list += "</ul>"
 
     return html_list
 
@@ -69,7 +71,8 @@ def main():
     return render_template('index.html', 
                             form=form,
                             settings = settings,
-                            playback_status = playback_status
+                            playback_status = playback_status,
+                            video_list = video_list
                             )
 
 @server.route('/launch_video')
