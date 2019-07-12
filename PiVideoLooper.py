@@ -53,7 +53,7 @@ def get_file_list():
     """
     return [f for f in os.listdir(ABSPATH + '/content/') if os.path.isfile(os.path.join(ABSPATH + '/content/', f))]
 
-def launch_video():
+def launch_video(return_string=False):
     """
     Loads the settings from the config file and launches omxplayer with appropriate settings
     """
@@ -80,7 +80,10 @@ def launch_video():
 
     print('Running command with parameters:')
     print(command)
-    subprocess.run(command)
+    if return_string == True:
+        return ' '.join(command)
+    else:
+        subprocess.run(command)
 
 def kill_video():
     """

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,12 +10,14 @@
 <!-- Javascript -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="{{ url_for('static',filename='functions.js') }}"></script>
+
 <!-- Style sheets -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
   integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
 <style>
   html,
   body,
@@ -26,6 +29,7 @@
     font-family: "Raleway", sans-serif
   }
 </style>
+
 
 <body class="w3-light-grey">
 
@@ -63,6 +67,7 @@
 
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
     <!-- Dashboard begin-->
     <div id="Dashboard" class="tabcontent">
       <!-- Header -->
@@ -110,6 +115,10 @@
             <h4>Current Settings</h4>
             <table class="w3-table w3-striped w3-white">
               <tr>
+                <td>Current command line string</i></td>
+                <td>{{command_string}}</td>
+              </tr>
+              <tr>
                 <td>Playlist</i></td>
                 <td>{{settings.file_location}}</td>
               </tr>
@@ -149,7 +158,8 @@
 
       <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 -8px">
-          <div class="">
+          <div class="w3-half">
+
             <h4>Current Settings</h4>
             <form method="GET" action="/update_settings" enctype="multipart/form-data">
               <table class="w3-table w3-striped w3-white">
@@ -164,7 +174,7 @@
                 <tr>
                   <td>{{ form.subtitles.label }}</td>
                   <td>{{ form.subtitles }}</td>
-                </tr>                
+                </tr>
                 <tr>
                   <td>{{ form.subtitles_location.label }}</td>
                   <td>{{ form.subtitles_location }}</td>
@@ -181,12 +191,8 @@
               {{form.submit}}
             </form>
           </div>
-        </div>
-      </div>
 
-      <div class="w3-panel">
-        <div class="w3-row-padding" style="margin:0 -8px">
-          <div class="">
+          <div class="w3-half">
             <h4>Current available videos</h4>
             <table class="w3-table w3-striped w3-white">
               {{ video_list | safe }}
@@ -194,43 +200,42 @@
           </div>
         </div>
       </div>
+      <!-- PlaybackSettings end -->
+
+
+      <!-- Footer -->
+      <footer class="w3-container w3-padding-16 w3-light-grey">
+        <h4>FOOTER</h4>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+      </footer>
+
+      <!-- End page content -->
     </div>
-    <!-- PlaybackSettings end -->
 
+    <script>
+      // Get the Sidebar
+      var mySidebar = document.getElementById("mySidebar");
 
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-16 w3-light-grey">
-      <h4>FOOTER</h4>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    </footer>
+      // Get the DIV with overlay effect
+      var overlayBg = document.getElementById("myOverlay");
 
-    <!-- End page content -->
-  </div>
-
-  <script>
-    // Get the Sidebar
-    var mySidebar = document.getElementById("mySidebar");
-
-    // Get the DIV with overlay effect
-    var overlayBg = document.getElementById("myOverlay");
-
-    // Toggle between showing and hiding the sidebar, and add overlay effect
-    function w3_open() {
-      if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-      } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
+      // Toggle between showing and hiding the sidebar, and add overlay effect
+      function w3_open() {
+        if (mySidebar.style.display === 'block') {
+          mySidebar.style.display = 'none';
+          overlayBg.style.display = "none";
+        } else {
+          mySidebar.style.display = 'block';
+          overlayBg.style.display = "block";
+        }
       }
-    }
 
-    // Close the sidebar with the close button
-    function w3_close() {
-      mySidebar.style.display = "none";
-      overlayBg.style.display = "none";
-    }
-  </script>
+      // Close the sidebar with the close button
+      function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+      }
+    </script>
 
 </body>
 

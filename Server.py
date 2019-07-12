@@ -66,13 +66,14 @@ def main():
         playback_status = 'Stopped'
 
     video_list = python_list_to_html(PiVideoLooper.get_file_list())
-
+    command_string = PiVideoLooper.launch_video(return_string=True)
 
     return render_template('index.html', 
                             form=form,
                             settings = settings,
                             playback_status = playback_status,
-                            video_list = video_list
+                            video_list = video_list,
+                            command_string = command_string
                             )
 
 @server.route('/launch_video')

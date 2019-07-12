@@ -1,1 +1,1 @@
-{"fileLocation": "content/testvideo.mp4", "commandLine": "--help", "subtitles": true, "subtitlesLocation": "content/testvideo.srt", "loop": true, "noInterface": true}
+{"fileLocation": "content/testvideo.mp4", "commandLine": "-LetsMakeThisAVeryLongString", "subtitles": true, "subtitlesLocation": "content/testvideo.srt", "loop": true, "noInterface": true}
