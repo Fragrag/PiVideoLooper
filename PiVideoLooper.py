@@ -46,9 +46,17 @@ class Config:
             print(json.dump(data[0], configfile))
 
 def get_file_list():
+    """
+    Get the list of files in the content folder
+
+    :return: List of files in content folder
+    """
     return [f for f in os.listdir(ABSPATH + '/content/') if os.path.isfile(os.path.join(ABSPATH + '/content/', f))]
 
 def launch_video():
+    """
+    Loads the settings from the config file and launches omxplayer with appropriate settings
+    """
     # Loads the config
     config = Config(CONFIG_FILE)
 
@@ -75,14 +83,23 @@ def launch_video():
     subprocess.run(command)
 
 def kill_video():
+    """
+    Kills omxplayer
+    """
     command = ['killall', 'omxplayer']
     subprocess.run(command)
 
 def restart_video():
+    """
+    Kills omxplayer followed by launching it again
+    """
     kill_video()
     launch_video()
 
 def reboot():
+    """
+    Reboots the Pi or system running PiVideoLooper
+    """
     command = ['reboot', 'now']
     subprocess.run(command)
 

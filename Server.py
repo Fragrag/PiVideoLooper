@@ -28,7 +28,27 @@ class SettingsForm(FlaskForm):
         self.loop.data = settings.loop
         self.no_interface.data = settings.no_interface
 
+def python_list_to_html(list):
+    """
+    Converts a Python list object to a formatted HTML list string
+    :param list: Python list object
+    :return: Formatted html list string
+    """
+    html_list = "<ul class=\"mt-decrease10\" style=\"list-style-type:none;\">\n"
+
+    for item in list:
+        html_list += "<li class=\"pl1\">" + str(item) + "</li>\n"
+
+    html_list += "</ul>"
+
+    return html_list
+
 def parse_form_bool(request_arg):
+    """
+    Parses the value of a BooleanField, which comes into the server as 'y' or null, into a Python boolean
+
+    :return: Boolean
+    """
     if request_arg == 'y':
         return True
     else:
@@ -42,6 +62,9 @@ def main():
         playback_status = 'Playing'
     else:
         playback_status = 'Stopped'
+
+    video_list = python_list_to_html(PiVideoLooper.get_file_list())
+
 
     return render_template('index.html', 
                             form=form,
