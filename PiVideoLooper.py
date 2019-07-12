@@ -65,7 +65,7 @@ def launch_video(return_string=False):
 
     # Goes through the booleans in the config and appends the appropriate argument
     if config.subtitles == True:
-        command.append('--subtitles ' + os.path.join(ABSPATH, config.subtitles_location))
+        command.append('--subtitles ' + "\"" + os.path.join(ABSPATH, config.subtitles_location) + "\"")
     if config.loop == True:
         command.append('--loop')
     if config.no_interface == True:
@@ -76,7 +76,7 @@ def launch_video(return_string=False):
         command.append(config.command_line)
 
     # Finally append the file location of video
-    command.append(os.path.join(ABSPATH, config.file_location))
+    command.append("\"" + os.path.join(ABSPATH, config.file_location) + "\"")
 
     print('Running command with parameters:')
     print(command)
