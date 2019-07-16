@@ -8,7 +8,7 @@
 <!-- TODO: All external libraries should be brought locally when in production-->
 
 <!-- Javascript -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{ url_for('static',filename='lib/jquery.min.js') }}"></script>
 <script src="{{ url_for('static',filename='functions.js') }}"></script>
 
 <!-- Style sheets -->
@@ -32,14 +32,6 @@
 
 
 <body class="w3-light-grey">
-
-  <!-- Top container -->
-  <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
-        class="fa fa-bars"></i>  Menu</button>
-    <span class="w3-bar-item w3-right">Logo</span>
-  </div>
-
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
     <div class="w3-container w3-row">
@@ -51,11 +43,11 @@
     <div class="w3-bar-block tab">
       <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
         onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a class="w3-bar-item w3-button w3-padding tablinks" onclick="openTab(event, 'Dashboard')"><i
+      <a href="#Dashboard" class="w3-bar-item w3-button w3-padding tablinks"><i
           class="fa fa-users fa-fw"></i>  Dashboard</a>
-      <a class="w3-bar-item w3-button w3-padding tablinks" onclick="openTab(event, 'PlaybackSettings')"><i
+      <a href="#PlaybackSettings" class="w3-bar-item w3-button w3-padding tablinks"><i
           class="fas fa-video fa-fw"></i>  Playback Settings</a>
-      <a class="w3-bar-item w3-button w3-padding tablinks" onclick="openTab(event, 'Settings')"><i
+      <a href=# class="w3-bar-item w3-button w3-padding tablinks"><i
           class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
     </div>
   </nav>
@@ -66,7 +58,7 @@
     title="close side menu" id="myOverlay"></div>
 
   <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+  <div class="w3-main" style="margin-left:300px">
 
     <!-- Dashboard begin-->
     <div id="Dashboard" class="tabcontent">
@@ -74,7 +66,6 @@
       <header class="w3-container" style="padding-top:22px">
         <h4><b>PiVideoLooper Dashboard</b></h4>
       </header>
-
       <div class="w3-row-padding w3-margin-bottom">
         <div class="w3-quarter">
           <div class="w3-container w3-red w3-padding-8">
@@ -155,7 +146,6 @@
       <header class="w3-container" style="padding-top:22px">
         <h4><b>Playback Settings</b></h4>
       </header>
-
       <div class="w3-panel">
         <div class="w3-row-padding" style="margin:0 -8px">
           <div class="w3-half">

@@ -6,11 +6,11 @@ ABSPATH = os.path.dirname(__file__)
 CONFIG_FILE = os.path.join(ABSPATH, 'config.json')
 
 class Config:
-    def __init__(self, _config_location=None):
-        self.config_location = _config_location
-        if self.config_location != None:
-            with open(self.config_location) as configfile:
-                config = json.load(configfile)
+    def __init__(self, _CONFIG_FILE=None):
+        self.CONFIG_FILE = _CONFIG_FILE
+        if self.CONFIG_FILE != None:
+            with open(self.CONFIG_FILE) as config_file:
+                config = json.load(config_file)
                 print(config)
 
             self.file_location = config['fileLocation']        
@@ -21,8 +21,8 @@ class Config:
             self.no_interface = config['noInterface']
 
     def refresh_config(self):
-        with open(self.config_location) as configfile:
-            config = json.load(configfile)
+        with open(self.CONFIG_FILE) as config_file:
+            config = json.load(config_file)
 
         self.file_location = config['fileLocation']        
         self.command_line = config['commandLine']
@@ -42,8 +42,8 @@ class Config:
             'noInterface': self.no_interface
         })
 
-        with open(self.config_location, 'w') as configfile:
-            print(json.dump(data[0], configfile))
+        with open(self.CONFIG_FILE, 'w') as config_file:
+            print(json.dump(data[0], config_file))
 
 def get_file_list():
     """

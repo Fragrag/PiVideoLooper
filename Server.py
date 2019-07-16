@@ -35,19 +35,16 @@ def python_list_to_html(list):
     :param list: Python list object
     :return: Formatted html list string
     """
-    # html_list = "<ul class=\"mt-decrease10\" style=\"list-style-type:none;\">\n"
     html_list = ""
 
     for item in list:
         html_list += "<tr><td>" + str(item) + "</td></tr>\n"
 
-    # html_list += "</ul>"
-
     return html_list
 
 def parse_form_bool(request_arg):
     """
-    Parses the value of a BooleanField, which comes into the server as 'y' or null, into a Python boolean
+    Parses the value of a BooleanField, which comes into the server as 'y' when ticked or null when unticked, into a Python boolean
 
     :return: Boolean
     """
