@@ -77,7 +77,7 @@ def launch_video(return_string=False):
         command.append(config.command_line)
 
     # Finally append the file location of video
-    command.append("\"" + os.path.join(ABSPATH, config.file_location) + "\"")
+    command.append(os.path.join(ABSPATH, config.file_location))
 
     print('Running command with parameters:')
     print(command)
