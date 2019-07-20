@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SubmitField
+from wtforms import StringField, BooleanField, SubmitField, SelectField
 
 import PiVideoLooper
 
@@ -48,6 +48,16 @@ def python_list_to_html(list):
 
     return html_list
 
+def create_html_dropdown_list_options(list):
+    options = ''
+    value = 0
+    for item in list:
+        # option = '<option value=\"' + str(value) + '\">' + item + '</option>\n'
+        option = '<option value=\"' + item + '\">' + item + '</option>\n'
+        options += option
+        value += 1
+
+    return options
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -64,22 +74,24 @@ def parse_form_bool(request_arg):
 
 @server.route('/', methods=['GET', 'POST'])
 def main():
-    form = SettingsForm(csrf_enabled=False, configobject = settings)
+    settings_form = SettingsForm(csrf_enabled=False, configobject = settings)
 
     if is_video_playing == True:
         playback_status = 'Playing'
     else:
         playback_status = 'Stopped'
 
-    video_list = python_list_to_html(PiVideoLooper.get_file_list())
+    available_videos = python_list_to_html(PiVideoLooper.get_file_list())
+    video_select_list = create_html_dropdown_list_options(PiVideoLooper.get_file_list())
     command_string = PiVideoLooper.launch_video(return_string=True)
 
     return render_template('index.html', 
-                            form=form,
+                            settings_form=settings_form,
                             settings = settings,
                             playback_status = playback_status,
-                            video_list = video_list,
-                            command_string = command_string
+                            available_videos = available_videos,
+                            command_string = command_string,
+                            video_select_list = video_select_list
                             )
 
 @server.route('/launch_video')

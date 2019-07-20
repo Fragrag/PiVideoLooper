@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<title>W3.CSS Template</title>
+<title>PiVideoLooper</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -43,12 +43,11 @@
     <div class="w3-bar-block tab">
       <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
         onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a href="#Dashboard" class="w3-bar-item w3-button w3-padding tablinks"><i
-          class="fa fa-users fa-fw"></i>  Dashboard</a>
-      <a href="#PlaybackSettings" class="w3-bar-item w3-button w3-padding tablinks"><i
-          class="fas fa-video fa-fw"></i>  Playback Settings</a>
-      <a href=# class="w3-bar-item w3-button w3-padding tablinks"><i
-          class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
+      <a href="#Dashboard" class="w3-bar-item w3-button w3-padding tablinks"><i class="fa fa-users fa-fw"></i> 
+        Dashboard</a>
+      <a href="#PlaybackSettings" class="w3-bar-item w3-button w3-padding tablinks"><i class="fas fa-video fa-fw"></i> 
+        Playback Settings</a>
+      <a href=# class="w3-bar-item w3-button w3-padding tablinks"><i class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
     </div>
   </nav>
 
@@ -154,43 +153,56 @@
             <form method="GET" action="/update_settings" enctype="multipart/form-data">
               <table class="w3-table w3-striped w3-white">
                 <tr>
-                  <td>{{ form.file_location.label }}</td>
-                  <td>{{ form.file_location }}</td>
+                  <td>{{ settings_form.file_location.label }}</td>
+                  <td>{{ settings_form.file_location }}</td>
                 </tr>
                 <tr>
-                  <td>{{ form.command_line.label }}</td>
-                  <td>{{ form.command_line }}</td>
+                  <td>{{ settings_form.command_line.label }}</td>
+                  <td>{{ settings_form.command_line }}</td>
                 </tr>
                 <tr>
-                  <td>{{ form.subtitles.label }}</td>
-                  <td>{{ form.subtitles }}</td>
+                  <td>{{ settings_form.subtitles.label }}</td>
+                  <td>{{ settings_form.subtitles }}</td>
                 </tr>
                 <tr>
-                  <td>{{ form.subtitles_location.label }}</td>
-                  <td>{{ form.subtitles_location }}</td>
+                  <td>{{ settings_form.subtitles_location.label }}</td>
+                  <td>{{ settings_form.subtitles_location }}</td>
                 </tr>
                 <tr>
-                  <td>{{ form.loop.label }}</td>
-                  <td>{{ form.loop }}</td>
+                  <td>{{ settings_form.loop.label }}</td>
+                  <td>{{ settings_form.loop }}</td>
                 </tr>
                 <tr>
-                  <td>{{ form.no_interface.label }}</td>
-                  <td>{{ form.no_interface }}</td>
+                  <td>{{ settings_form.no_interface.label }}</td>
+                  <td>{{ settings_form.no_interface }}</td>
                 </tr>
               </table>
-              {{form.submit}}
+              {{settings_form.submit}}
             </form>
           </div>
 
           <div class="w3-half">
             <h4>Currently available videos</h4>
             <table class="w3-table w3-striped w3-white">
-              {{ video_list | safe }}
+              {{ available_videos | safe }}
             </table>
+          </div>
+        </div>
+
+        <div class="w3-panel">
+          <div class="w3-half">
             <h4>Upload new File</h4>
-            <form method=post action="/upload" enctype=multipart/form-data>
-            <input type=file name=file>
-            <input type=submit value=Upload>
+            <form method=post action="/upload" enctype=multipart/form-data> <input type=file name=file>
+              <input type=submit value=Upload>
+            </form>
+          </div>
+          <div class="w3-half">
+            <h4>Delete video</h4>
+            <form method="GET" action="/delete">
+              <select name="filename">
+                {{ video_select_list | safe }}
+              </select>
+              <button type="submit" enctype="multipart/form-data">Delete</button>
             </form>
           </div>
         </div>
