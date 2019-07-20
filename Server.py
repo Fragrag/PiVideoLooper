@@ -98,26 +98,26 @@ def main():
 def launch_video():
     print("Launch video")
     is_video_playing = True
-    # PiVideoLooper.launch_video()
+    PiVideoLooper.launch_video()
     return ('', 204)
 
 @server.route('/kill_video')
 def kill_video():
     print("Kill video")
     is_video_playing = False
-    # PiVideoLooper.kill_video()
+    PiVideoLooper.kill_video()
     return ('', 204)
 
 @server.route('/restart_video')
 def restart_video():
     print("Restart video")
-    # PiVideoLooper.restart_video()
+    PiVideoLooper.restart_video()
     return ('', 204)
 
 @server.route('/reboot')
 def reboot():
     print("Reboot pi")
-    # PiVideoLooper.reboot()
+    PiVideoLooper.reboot()
     return ('', 204)
 
 @server.route('/update_settings', methods=['GET', 'POST'])
