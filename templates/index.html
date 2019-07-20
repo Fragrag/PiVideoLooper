@@ -183,10 +183,15 @@
           </div>
 
           <div class="w3-half">
-            <h4>Current available videos</h4>
+            <h4>Currently available videos</h4>
             <table class="w3-table w3-striped w3-white">
               {{ video_list | safe }}
             </table>
+            <h4>Upload new File</h4>
+            <form method=post action="/upload" enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+            </form>
           </div>
         </div>
       </div>

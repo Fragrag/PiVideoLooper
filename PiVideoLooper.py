@@ -4,6 +4,7 @@ import os
 
 ABSPATH = os.path.dirname(__file__)
 CONFIG_FILE = os.path.join(ABSPATH, 'config.json')
+CONTENT_FOLDER = ABSPATH + '/content/'
 
 class Config:
     def __init__(self, _CONFIG_FILE=None):
@@ -51,7 +52,7 @@ def get_file_list():
 
     :return: List of files in content folder
     """
-    return [f for f in os.listdir(ABSPATH + '/content/') if os.path.isfile(os.path.join(ABSPATH + '/content/', f))]
+    return [f for f in os.listdir(CONTENT_FOLDER) if os.path.isfile(os.path.join(CONTENT_FOLDER, f))]
 
 def launch_video(return_string=False):
     """

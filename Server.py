@@ -1,11 +1,17 @@
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from werkzeug.utils import secure_filename
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
 
 import PiVideoLooper
 
+ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov'}
 
 server = Flask(__name__)
+server.config['UPLOAD_FOLDER'] = PiVideoLooper.CONTENT_FOLDER
+server.secret_key = 'PIVIDEOLOOPER'
+
 settings = PiVideoLooper.Config(PiVideoLooper.CONFIG_FILE)
 is_video_playing = False
 
@@ -41,6 +47,9 @@ def python_list_to_html(list):
         html_list += "<tr><td>" + str(item) + "</td></tr>\n"
 
     return html_list
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def parse_form_bool(request_arg):
     """
@@ -121,6 +130,41 @@ def update_settings():
     print(settings.file_location)
     settings.write_config()
     return ('', 204)
+
+@server.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return ('', 204)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return ('', 204)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(server.config['UPLOAD_FOLDER'], filename))
+            flash('Uploaded!')
+            return ('', 204)
+
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+    </form>
+    '''
+
+@server.route('/delete', methods=['GET'])
+def delete():
+    if request.method == 'GET':
+        os.remove(os.path.join(server.config['UPLOAD_FOLDER'], request.args.get('filename')))
+        return ('', 204)
 
 @server.route('/echo')
 def echo():
