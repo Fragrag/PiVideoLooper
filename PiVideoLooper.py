@@ -62,7 +62,7 @@ def launch_video(return_string=False):
     config = Config(CONFIG_FILE)
 
     # Sets the base command, i.e. the video player
-    command = ['omxplayer']
+    command = ['sudo', 'omxplayer']
 
     # Goes through the booleans in the config and appends the appropriate argument
     if config.subtitles == True:
@@ -90,7 +90,7 @@ def kill_video():
     """
     Kills omxplayer
     """
-    command = ['killall', 'omxplayer']
+    command = ['sudo', 'killall', 'omxplayer']
     subprocess.run(command)
 
 def restart_video():
@@ -104,7 +104,7 @@ def reboot():
     """
     Reboots the Pi or system running PiVideoLooper
     """
-    command = ['reboot', 'now']
+    command = ['sudo', 'reboot', 'now']
     subprocess.run(command)
 
     # with open(os.path.join(abspath, 'log.txt'),'wb') as out, open(os.path.join(abspath, 'errorlog.txt'),'wb') as err:
