@@ -90,7 +90,7 @@ def kill_video():
     """
     Kills omxplayer
     """
-    command = ['sudo', 'killall', 'omxplayer']
+    command = ['sudo', 'killall', 'omxplayer.bin']
     subprocess.run(command)
 
 def restart_video():

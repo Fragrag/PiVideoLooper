@@ -162,15 +162,7 @@ def upload():
             flash('Uploaded!')
             return ('', 204)
 
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-    <input type=file name=file>
-    <input type=submit value=Upload>
-    </form>
-    '''
+    return ('', 204)
 
 @server.route('/delete', methods=['GET'])
 def delete():
@@ -181,7 +173,7 @@ def delete():
 @server.route('/echo')
 def echo():
     print("Echo")
-    # PiVideoLooper.echo('Echo')
+    PiVideoLooper.echo('Echo')
     return ('', 204)
 
 if __name__ == "__main__":
