@@ -5,12 +5,18 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, SelectField
 
 import PiVideoLooper
+import Adafruit_Video_Looper
 
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov'}
 
 server = Flask(__name__)
 server.config['UPLOAD_FOLDER'] = PiVideoLooper.CONTENT_FOLDER
 server.secret_key = 'PIVIDEOLOOPER'
+
+# NEW ARCHITECTURE IMPLEMENTING ADAFRUIT_VIDEO_LOOPER
+# Create instance of Adafruit_Video_Looper.VideoLooper
+# /launch_video will run the instances self.run()
+# /kill_video will run self.quit()
 
 settings = PiVideoLooper.Config(PiVideoLooper.CONFIG_FILE)
 is_video_playing = False
